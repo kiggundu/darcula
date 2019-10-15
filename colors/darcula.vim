@@ -417,3 +417,6 @@ hi! link shOperator Normal
 
 " help
 hi! link helpHyperTextJump Number
+
+" Coq ( via Coqtail ) overrides 
+hi! link CoqtailChecked docComment 
