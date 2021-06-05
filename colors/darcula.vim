@@ -6,9 +6,6 @@ if exists("g:darcula")
   finish
 endif
 let g:darcula = 1
-set termguicolors
-set background=dark
-set cursorline
 highlight clear
 if exists("syntax_on")
   syntax reset
@@ -16,76 +13,116 @@ endif
 
 let g:colors_name='darcula'
 
-let s:bg='#2B2B2B'
-let s:fg='#A9B7C6'
-let s:cursor='#BBBBBB'
-let s:gutter='#313335'
-let s:selection='#214283'
-let s:cursorLine='#323232'
-let s:cursorLineNr='#A4A3A3'
-let s:errorMsg='#CC666E'
-let s:error='#BC3F3C'
-let s:warning=s:fg
-let s:muted='#72737A'
-let s:link='#287BDE'
-let s:stdOutput='#BBBBBB'
-let s:lineNumber='#606366'
-let s:matchBraceFg='#FFEF28'
-let s:matchBraceBg='#3B514D'
-let s:visual='#10211e'
-let s:todo='#A8C023'
-let s:search='#32593D'
-let s:incSearch='#155221'
-let s:foldedFg='#8C8C8C'
-let s:foldedBg='#3A3A3A'
-let s:constant='#9876AA'
-let s:keyword='#CC7832'
-let s:comment='#808080'
-let s:docComment='#629755'
-let s:string='#6A8759'
-let s:number='#6897BB'
-let s:delimiter='#CC7832'
-let s:specialComment='#8A653B'
-let s:function='#FFC66D'
-let s:diffAdd='#294436'
-let s:diffText='#385570'
-let s:diffDelete='#484A4A'
-let s:diffChange='#303C47'
-let s:addStripe='#384C38'
-let s:stripeWhiteSpace='#4C4638'
-let s:changeStripe='#374752'
-let s:deleteStripe='#656E76'
-let s:typo='#659C6B'
-let s:metaData='#BBB529'
-let s:debug='#666D75'
-let s:codeWarning='#52503A'
-let s:errorStripe='#9E2927'
-let s:warnStripe='#BE9117'
-let s:infoStripe='#756D56'
-let s:typeDef='#B9BCD1'
-let s:menu='#46484A'
-let s:menuFg='#AFB1B3'
-let s:menuSel='#103A5C'
-let s:menuSBar='#616263'
-let s:tag='#E8BF6A'
-let s:entity='#6D9CBE'
-let s:htmlAttribute='#BABABA'
-let s:htmlString='#A5C261'
-let s:tsObject='#507874'
-let s:statusLine='#3C3F41'
-let s:statusLineFg='#AEB0B2'
-let s:statusLineNC='#88898B'
-let s:tabLineSel='#4E5254'
-let s:keywordTwo='#C57633'
-let s:templateLanguage='#232525'
+let s:p={
+      \ 'null': ['NONE', 'NONE'],
+      \ 'bg': ['#2B2B2B', 235],
+      \ 'fg': ['#A9B7C6', 145],
+      \ 'cursor': ['#BBBBBB', 250],
+      \ 'identifierUnderCaret': ['#344134', 237],
+      \ 'identifierUnderCaretWrite': ['#40332B', 58],
+      \ 'gutter': ['#313335', 236],
+      \ 'selection': ['#214283', 24],
+      \ 'cursorLine': ['#323232', 236],
+      \ 'cursorLineNr': ['#A4A3A3', 248],
+      \ 'errorMsg': ['#CC666E', 174],
+      \ 'error': ['#BC3F3C', 131],
+      \ 'warning': ['#A9B7C6', 145],
+      \ 'muted': ['#606060', 241],
+      \ 'link': ['#287BDE', 32],
+      \ 'stdOutput': ['#BBBBBB', 250],
+      \ 'lineNumber': ['#606366', 241],
+      \ 'matchBraceFg': ['#FFEF28', 220],
+      \ 'matchBraceBg': ['#3B514D', 59],
+      \ 'todo': ['#A8C023', 142],
+      \ 'search': ['#32593D', 23],
+      \ 'incSearch': ['#155221', 22],
+      \ 'foldedFg': ['#8C8C8C', 245],
+      \ 'foldedBg': ['#3A3A3A', 237],
+      \ 'constant': ['#9876AA', 103],
+      \ 'keyword': ['#CC7832', 172],
+      \ 'comment': ['#808080', 244],
+      \ 'docComment': ['#629755', 65],
+      \ 'string': ['#6A8759', 101],
+      \ 'number': ['#6897BB', 103],
+      \ 'delimiter': ['#CC7832', 172],
+      \ 'specialComment': ['#8A653B', 95],
+      \ 'function': ['#FFC66D', 216],
+      \ 'diffAdd': ['#294436', 23],
+      \ 'diffText': ['#385570', 60],
+      \ 'diffDelete': ['#484A4A', 239],
+      \ 'diffChange': ['#303C47', 23],
+      \ 'addStripe': ['#384C38', 66],
+      \ 'stripeWhiteSpace': ['#4C4638', 59],
+      \ 'changeStripe': ['#374752', 60],
+      \ 'deleteStripe': ['#656E76', 242],
+      \ 'typo': ['#659C6B', 72],
+      \ 'metaData': ['#BBB529', 142],
+      \ 'macroName': ['#908B25', 100],
+      \ 'cDataStructure': ['#B5B6E3', 146],
+      \ 'cStructField': ['#9373A5', 103],
+      \ 'debug': ['#666D75', 102],
+      \ 'codeError': ['#532B2E', 52],
+      \ 'codeWarning': ['#52503A', 59],
+      \ 'errorStripe': ['#9E2927', 124],
+      \ 'warnStripe': ['#BE9117', 136],
+      \ 'infoStripe': ['#756D56', 101],
+      \ 'hintStripe': ['#6c7176', 242],
+      \ 'typeDef': ['#B9BCD1', 146],
+      \ 'menu': ['#46484A', 238],
+      \ 'menuFg': ['#BBBBBB', 250],
+      \ 'menuSel': ['#113A5C', 23],
+      \ 'menuSBar': ['#616263', 241],
+      \ 'tag': ['#E8BF6A', 180],
+      \ 'entity': ['#6D9CBE', 109],
+      \ 'htmlAttribute': ['#BABABA', 250],
+      \ 'htmlString': ['#A5C261', 143],
+      \ 'tsObject': ['#507874', 66],
+      \ 'statusLine': ['#3C3F41', 237],
+      \ 'statusLineFg': ['#BBBBBB', 250],
+      \ 'statusLineNC': ['#787878', 243],
+      \ 'tabLineSel': ['#4E5254', 239],
+      \ 'shCommand': ['#C57633', 137],
+      \ 'templateLanguage': ['#232525', 235],
+      \ 'rustMacro': ['#4EADE5', 74],
+      \ 'rustLifetime': ['#20999D', 37],
+      \ 'duplicateFromServer': ['#5E5339', 59],
+      \ 'hintBg': ['#3B3B3B', 237],
+      \ 'hintFg': ['#787878', 243],
+      \ 'wrapGuide': ['#2F2F2F', 236],
+      \ 'UIBorder': ['#616161', 241],
+      \ 'UISelection': ['#0D293E', 17],
+      \ 'ANSIBlack': ['#FFFFFF', 231],
+      \ 'ANSIRed': ['#FF6B68', 210],
+      \ 'ANSIGreen': ['#A8C023', 142],
+      \ 'ANSIYellow': ['#D6BF55', 179],
+      \ 'ANSIBlue': ['#5394EC', 68],
+      \ 'ANSIMagenta': ['#AE8ABE', 139],
+      \ 'ANSICyan': ['#299999', 37],
+      \ 'ANSIGray': ['#999999', 247],
+      \ 'ANSIDarkGray': ['#555555', 240],
+      \ 'ANSIBrightRed': ['#FF8785', 210],
+      \ 'ANSIBrightGreen': ['#A8C023', 142],
+      \ 'ANSIBrightYellow': ['#FFFF00', 226],
+      \ 'ANSIBrightBlue': ['#7EAEF1', 110],
+      \ 'ANSIBrightMagenta': ['#FF99FF', 219],
+      \ 'ANSIBrightCyan': ['#6CDADA', 116],
+      \ 'ANSIWhite': ['#1F1F1F', 234],
+      \ 'UIBlue': ['#3592C4', 67],
+      \ 'UIGreen': ['#499C54', 71],
+      \ 'UIRed': ['#C75450', 131],
+      \ 'UIBrown': ['#93896C', 102]
+      \ }
+
+" expose the palette
+let darcula#palette=s:p
 
 " helper function
 function s:Hi(group, fg, ...)
-  " arguments: group, guifg, guibg, gui, guisp
+  " arguments: group, fg, bg, style
   if a:0 >= 1
     let bg=a:1
   else
-    let bg='NONE'
+    let bg=s:p.null
   endif
   if a:0 >= 2 && strlen(a:2)
     let style=a:2
@@ -94,193 +131,358 @@ function s:Hi(group, fg, ...)
   endif
   let hiList = [
         \ 'hi', a:group,
-        \ 'guifg=' . a:fg,
-        \ 'guibg=' . bg,
-        \ 'gui=' . style,
-        \ 'cterm=' . style
+        \ 'ctermfg=' . a:fg[1],
+        \ 'guifg=' . a:fg[0],
+        \ 'ctermbg=' . bg[1],
+        \ 'guibg=' . bg[0],
+        \ 'cterm=' . style,
+        \ 'gui=' . style
         \ ]
   execute join(hiList)
 endfunction
 
-call s:Hi('Normal', s:fg, s:bg)
-call s:Hi('ColorColumn', s:lineNumber)
-hi! link Conceal Normal
-call s:Hi('Cursor', s:cursor)
+" expose that function
+function darcula#Hi(group, fg, ...)
+  if a:0 >= 2
+    call s:Hi(a:group, a:fg, a:1, a:2)
+  elseif a:0 == 1
+    call s:Hi(a:group, a:fg, a:1)
+  else
+    call s:Hi(a:group, a:fg)
+  endif
+endfunction
+
+call s:Hi('Normal', s:p.fg, s:p.bg)
+call s:Hi('ColorColumn', s:p.null, s:p.wrapGuide)
+call s:Hi('Conceal', s:p.muted, s:p.bg)
+call s:Hi('Cursor', s:p.cursor)
 hi! link lCursor Cursor
 hi! link CursorIM Cursor
 hi! link CursorColumn CursorLine
-call s:Hi('CursorLine', 'NONE', s:cursorLine, 'NONE')
-call s:Hi('DiffAdd', 'NONE', s:diffAdd)
-call s:Hi('DiffChange', 'NONE', s:diffChange)
-call s:Hi('DiffDelete', 'NONE', s:diffDelete)
-call s:Hi('DiffText', 'NONE', s:diffText)
-hi! link Directory Normal
+call s:Hi('CursorLine', s:p.null, s:p.cursorLine, 'NONE')
+call s:Hi('DiffAdd', s:p.null, s:p.diffAdd)
+call s:Hi('DiffChange', s:p.null, s:p.diffChange)
+call s:Hi('DiffDelete', s:p.null, s:p.diffDelete)
+call s:Hi('DiffText', s:p.null, s:p.diffText)
+hi! link Directory NormalFg
 hi! link EndOfBuffer NonText
-call s:Hi('ErrorMsg', s:errorMsg)
-call s:Hi('Error', s:error)
-call s:Hi('VertSplit', s:muted)
-call s:Hi('Folded', s:foldedFg, s:foldedBg)
+call s:Hi('ErrorMsg', s:p.errorMsg)
+call s:Hi('Error', s:p.error)
+call s:Hi('VertSplit', s:p.muted)
+call s:Hi('Folded', s:p.foldedFg, s:p.foldedBg)
 hi! link FoldColumn Folded
-call s:Hi('SignColumn', 'NONE', s:gutter)
-call s:Hi('LineNr', s:lineNumber, s:gutter)
-call s:Hi('CursorLineNr', s:cursorLineNr, s:cursorLine)
-call s:Hi('MatchParen', s:matchBraceFg, s:matchBraceBg, 'bold')
-call s:Hi('ModeMsg', s:stdOutput)
-hi! link MoreMsg Normal
-call s:Hi('NonText', s:muted)
-call s:Hi('Pmenu', s:menuFg, s:menu)
-call s:Hi('PmenuSel', s:menuFg, s:menuSel)
-call s:Hi('PmenuSbar', s:menu, s:menu)
-call s:Hi('PmenuThumb', s:menuSBar, s:menuSBar)
-hi! link Question Normal
-hi! link QuickFixLine Normal
-call s:Hi('Search', 'NONE', s:search)
-call s:Hi('IncSearch', 'NONE', s:incSearch)
+call s:Hi('SignColumn', s:p.null, s:p.gutter)
+call s:Hi('LineNr', s:p.lineNumber, s:p.gutter)
+hi! link LineNrAbove LineNr
+hi! link LineNrBelow LineNr
+call s:Hi('CursorLineNr', s:p.cursorLineNr, s:p.cursorLine)
+call s:Hi('MatchParen', s:p.matchBraceFg, s:p.matchBraceBg, 'bold')
+call s:Hi('ModeMsg', s:p.stdOutput)
+hi! link MoreMsg NormalFg
+call s:Hi('NonText', s:p.muted)
+call s:Hi('Pmenu', s:p.menuFg, s:p.menu)
+call s:Hi('PmenuSel', s:p.menuFg, s:p.menuSel)
+call s:Hi('PmenuSbar', s:p.menu, s:p.menu)
+call s:Hi('PmenuThumb', s:p.menuSBar, s:p.menuSBar)
+hi! link Question NormalFg
+hi! link QuickFixLine NormalFg
+call s:Hi('Search', s:p.null, s:p.search)
+call s:Hi('IncSearch', s:p.null, s:p.incSearch)
 hi! link SpecialKey NonText
-call s:Hi('SpellBad', s:typo, 'NONE', 'underline')
+call s:Hi('SpellBad', s:p.typo, s:p.null, 'underline')
 hi! link SpellCap SpellBad
 hi! link SpellLocal SpellBad
 hi! link SpellRare SpellBad
-call s:Hi('StatusLine', s:statusLineFg, s:statusLine)
-call s:Hi('StatusLineNC', s:statusLineNC, s:statusLine)
+call s:Hi('StatusLine', s:p.statusLineFg, s:p.statusLine)
+call s:Hi('StatusLineNC', s:p.statusLineNC, s:p.statusLine)
 hi! link StatusLineTerm StatusLine
 hi! link StatusLineTermNC StatusLineNC
-call s:Hi('TabLine', s:statusLineFg, s:statusLine)
-call s:Hi('TabLineFill', s:statusLine, s:statusLine)
-call s:Hi('TabLineSel', s:fg, s:tabLineSel)
-call s:Hi('Terminal', s:stdOutput, s:bg)
+call s:Hi('TabLine', s:p.statusLineFg, s:p.statusLine)
+call s:Hi('TabLineFill', s:p.statusLine, s:p.statusLine)
+call s:Hi('TabLineSel', s:p.fg, s:p.tabLineSel)
+call s:Hi('Terminal', s:p.stdOutput, s:p.bg)
 hi! link Title Special
-call s:Hi('Visual', 'NONE', s:selection)
+call s:Hi('Visual', s:p.null, s:p.selection)
 hi! link VisualNOS Visual
-call s:Hi('WarningMsg', s:warning)
-hi! link WildMenu Normal
-call s:Hi('Comment', s:comment)
-hi! link Identifier Normal
+call s:Hi('WarningMsg', s:p.warning)
+hi! link WildMenu PmenuSel
+call s:Hi('Comment', s:p.comment)
+hi! link Identifier NormalFg
 hi! link Type Keyword
-call s:Hi('Typedef', s:typeDef, s:bg)
-call s:Hi('Todo', s:todo, s:bg, 'italic')
+call s:Hi('Typedef', s:p.typeDef)
+call s:Hi('Todo', s:p.todo, s:p.null, 'italic')
 hi! link Special PreProc
-call s:Hi('Constant', s:constant)
-call s:Hi('String', s:string)
+call s:Hi('Constant', s:p.constant, s:p.null, 'italic')
+call s:Hi('String', s:p.string)
 hi! link Character String
-call s:Hi('Number', s:number)
-call s:Hi('Delimiter', s:delimiter)
-call s:Hi('SpecialComment', s:specialComment, 'NONE', 'italic')
+call s:Hi('Number', s:p.number)
+call s:Hi('Delimiter', s:p.delimiter)
+call s:Hi('SpecialComment', s:p.specialComment, s:p.null, 'italic')
 hi! link Statement Keyword
-call s:Hi('Keyword', s:keyword)
-call s:Hi('Underlined', s:fg, s:bg, 'underline')
-call s:Hi('PreProc', s:metaData)
+call s:Hi('Keyword', s:p.keyword)
+call s:Hi('Underlined', s:p.fg, s:p.null, 'underline')
+call s:Hi('PreProc', s:p.metaData)
 hi! link Tag Keyword
-call s:Hi('Debug', s:debug, 'NONE', 'italic')
-call s:Hi('Function', s:function)
+call s:Hi('Debug', s:p.debug, s:p.null, 'italic')
+call s:Hi('Function', s:p.function)
 
 " helper groups
-call s:Hi('docComment', s:docComment, s:bg, 'italic')
+call s:Hi('docComment', s:p.docComment, s:p.null, 'italic')
+call s:Hi('NormalFg', s:p.fg)
+call s:Hi('GitAddStripe', s:p.addStripe, s:p.addStripe)
+call s:Hi('GitChangeStripe', s:p.changeStripe, s:p.changeStripe)
+call s:Hi('GitDeleteStripe', s:p.deleteStripe, s:p.gutter)
+call s:Hi('CodeError', s:p.null, s:p.codeError)
+call s:Hi('CodeWarning', s:p.null, s:p.codeWarning)
+call s:Hi('CodeInfo', s:p.null, s:p.infoStripe)
+call s:Hi('CodeHint', s:p.hintFg, s:p.hintBg)
+call s:Hi('ErrorSign', s:p.errorStripe, s:p.gutter)
+call s:Hi('WarningSign', s:p.warnStripe, s:p.gutter)
+call s:Hi('InfoSign', s:p.infoStripe, s:p.gutter)
+call s:Hi('HintSign', s:p.hintStripe, s:p.gutter)
+call s:Hi('IdentifierUnderCaret', s:p.null, s:p.identifierUnderCaret)
+call s:Hi('IdentifierUnderCaretWrite', s:p.null, s:p.identifierUnderCaretWrite)
+call s:Hi('InstanceField', s:p.constant)
+call s:Hi('UIDialog', s:p.fg, s:p.statusLine)
+call s:Hi('UIBorder', s:p.UIBorder, s:p.statusLine)
+call s:Hi('UISelection', s:p.null, s:p.UISelection)
 
-" Terminal colors (for :terminal)
-let s:ANSIBlack='#FFFFFF'
-let s:ANSIRed='#FF6B68'
-let s:ANSIGreen='#A8C023'
-let s:ANSIYellow='#D6BF55'
-let s:ANSIBlue='#5394EC'
-let s:ANSIMagenta='#AE8ABE'
-let s:ANSICyan='#299999'
-let s:ANSIGray='#999999'
-let s:ANSIDarkGray='#555555'
-let s:ANSIBrightRed='#FF8785'
-let s:ANSIBrightGreen='#A8C023'
-let s:ANSIBrightYellow='#FFFF00'
-let s:ANSIBrightBlue='#7EAEF1'
-let s:ANSIBrightMagenta='#FF99FF'
-let s:ANSIBrightCyan='#6CDADA'
-let s:ANSIWhite='#1F1F1F'
-let g:terminal_ansi_colors=[
-      \ s:ANSIBlack,
-      \ s:ANSIRed,
-      \ s:ANSIGreen,
-      \ s:ANSIYellow,
-      \ s:ANSIBlue,
-      \ s:ANSIMagenta,
-      \ s:ANSICyan,
-      \ s:ANSIGray,
-      \ s:ANSIDarkGray,
-      \ s:ANSIBrightRed,
-      \ s:ANSIBrightGreen,
-      \ s:ANSIBrightYellow,
-      \ s:ANSIBrightBlue,
-      \ s:ANSIBrightMagenta,
-      \ s:ANSIBrightCyan,
-      \ s:ANSIWhite
-      \ ]
+" neovim
+if has('nvim')
+  " the following code snippet fix an issue with CursorLine hi group
+  " see https://github.com/neovim/neovim/issues/9019
+  if has('termguicolors') && &termguicolors
+    hi CursorLine ctermfg=white
+  else
+    hi CursorLine guifg=white
+  endif
+  hi! link NormalFloat Pmenu
+  hi! link NormalNC NormalFg
+  hi! link MsgArea NormalFg
+  hi! link MsgSeparator StatusLine
+  hi! link QuickFixLine NormalFg
+  hi! link Substitute Search
+  " TermCursor
+  " TermCursorNC
+  hi! link Whitespace NonText
+  hi! link healthSuccess IncSearch
+  call s:Hi('NvimInternalError', s:p.error, s:p.error)
+  call s:Hi('RedrawDebugClear', s:p.fg, s:p.duplicateFromServer)
+  call s:Hi('RedrawDebugComposed', s:p.fg, s:p.search)
+  call s:Hi('RedrawDebugRecompose', s:p.fg, s:p.codeError)
+  " Terminal colors
+  let g:terminal_color_0 = s:p.ANSIBlack[0]
+  let g:terminal_color_1 = s:p.ANSIRed[0]
+  let g:terminal_color_2 = s:p.ANSIGreen[0]
+  let g:terminal_color_3 = s:p.ANSIYellow[0]
+  let g:terminal_color_4 = s:p.ANSIBlue[0]
+  let g:terminal_color_5 = s:p.ANSIMagenta[0]
+  let g:terminal_color_6 = s:p.ANSICyan[0]
+  let g:terminal_color_7 = s:p.ANSIGray[0]
+  let g:terminal_color_8 = s:p.ANSIDarkGray[0]
+  let g:terminal_color_9 = s:p.ANSIBrightRed[0]
+  let g:terminal_color_10 = s:p.ANSIBrightGreen[0]
+  let g:terminal_color_11 = s:p.ANSIBrightYellow[0]
+  let g:terminal_color_12 = s:p.ANSIBrightBlue[0]
+  let g:terminal_color_13 = s:p.ANSIBrightMagenta[0]
+  let g:terminal_color_14 = s:p.ANSIBrightCyan[0]
+  let g:terminal_color_15 = s:p.ANSIWhite[0]
 
-" GitGutter
-call s:Hi('GitGutterAdd', s:addStripe, s:addStripe)
-call s:Hi('GitGutterChange', s:changeStripe, s:changeStripe)
-call s:Hi('GitGutterDelete', s:deleteStripe, s:gutter)
-call s:Hi('GitGutterChangeDelete', s:stripeWhiteSpace, s:stripeWhiteSpace)
-if &encoding == 'utf-8'
-  let g:gitgutter_sign_removed = '▶'
+  " nvim-treesitter
+  hi! link TSAnnotation PreProc
+  hi! link TSAttribute PreProc
+  hi! link TSBoolean Keyword
+  hi! link TSCharacter Character
+  hi! link TSComment Comment
+  hi! link TSConstructor Function
+  hi! link TSConditional Keyword
+  hi! link TSConstant Constant
+  hi! link TSConstBuiltin Keyword
+  hi! link TSConstMacro cMacroName
+  hi! link TSError codeError
+  hi! link TSException Keyword
+  hi! link TSField InstanceField
+  hi! link TSFloat Number
+  hi! link TSFunction Function
+  hi! link TSFuncBuiltin Normal
+  hi! link TSFuncMacro cMacroName
+  hi! link TSInclude Keyword
+  hi! link TSKeyword Keyword
+  hi! link TSKeywordFunction Keyword
+  hi! link TSLabel Normal
+  hi! link TSMethod Function
+  hi! link TSNamespace cDataStructure
+  hi! link TSNone Normal
+  hi! link TSNumber Number
+  hi! link TSOperator Normal
+  hi! link TSParameter Normal
+  hi! link TSParameterReference Normal
+  hi! link TSProperty TSField
+  hi! link TSPunctDelimiter Normal
+  hi! link TSPunctBracket Normal
+  hi! link TSPunctSpecial Keyword
+  hi! link TSRepeat Keyword
+  hi! link TSString String
+  hi! link TSStringRegex Number
+  hi! link TSStringEscape Keyword
+  hi! link TSTag htmlTag
+  hi! link TSTagDelimiter htmlTag
+  hi! link TSText Normal
+  call s:Hi('TSStrong', s:p.fg, s:p.null, 'bold')
+  call s:Hi('TSEmphasis', s:p.fg, s:p.null, 'italic')
+  call s:Hi('TSUnderline', s:p.fg, s:p.null, 'underline')
+  call s:Hi('TSStrike', s:p.fg, s:p.null, 'strikethrough')
+  call s:Hi('TSTitle', s:p.fg, s:p.null, 'bold,underline')
+  hi! link TSLiteral Normal
+  hi! link TSURI markdownLinkText
+  hi! link TSNote CodeInfo
+  hi! link TSWarning CodeWarning
+  hi! link TSDanger CodeError
+  hi! link TSType Normal
+  hi! link TSTypeBuiltin Keyword
+  hi! link TSVariable Normal
+  hi! link TSVariableBuiltin Keyword
+
+  " LSP
+  hi! link LspDiagnosticsDefaultError CodeError
+  hi! link LspDiagnosticsDefaultWarning CodeWarning
+  hi! link LspDiagnosticsDefaultInformation CodeInfo
+  hi! link LspDiagnosticsDefaultHint CodeHint
+  hi! link LspDiagnosticsSignError ErrorSign
+  hi! link LspDiagnosticsSignWarning WarningSign
+  hi! link LspDiagnosticsSignInformation InfoSign
+  hi! link LspDiagnosticsSignHint HintSign
+  hi! link LspReferenceText IdentifierUnderCaret
+  hi! link LspReferenceRead IdentifierUnderCaret
+  hi! link LspReferenceWrite IdentifierUnderCaretWrite
+  hi! link LspDiagnosticsUnderlineError CodeError
+  hi! link LspDiagnosticsUnderlineWarning CodeWarning
+  hi! link LspDiagnosticsUnderlineInformation CodeInfo
+  hi! link LspDiagnosticsUnderlineHint CodeHint
+  hi! link LspDiagnosticsFloatingError NormalFloat
+  hi! link LspDiagnosticsFloatingWarning NormalFloat
+  hi! link LspDiagnosticsFloatingInformation NormalFloat
+  hi! link LspDiagnosticsFloatingHint NormalFloat
 endif
 
-" ALE
-call s:Hi('ALEInfo', 'NONE', 'NONE', 'underline')
-call s:Hi('ALEWarning', 'NONE', s:codeWarning)
-hi! link ALEError Error
-call s:Hi('ALEErrorSign', s:errorStripe, s:gutter)
-call s:Hi('ALEWarningSign', s:warnStripe, s:gutter)
-call s:Hi('ALEInfoSign', s:infoStripe, s:gutter)
+" Vim terminal colors (for :terminal)
+if !has('nvim')
+  let g:terminal_ansi_colors=[
+        \ s:p.ANSIBlack[0],
+        \ s:p.ANSIRed[0],
+        \ s:p.ANSIGreen[0],
+        \ s:p.ANSIYellow[0],
+        \ s:p.ANSIBlue[0],
+        \ s:p.ANSIMagenta[0],
+        \ s:p.ANSICyan[0],
+        \ s:p.ANSIGray[0],
+        \ s:p.ANSIDarkGray[0],
+        \ s:p.ANSIBrightRed[0],
+        \ s:p.ANSIBrightGreen[0],
+        \ s:p.ANSIBrightYellow[0],
+        \ s:p.ANSIBrightBlue[0],
+        \ s:p.ANSIBrightMagenta[0],
+        \ s:p.ANSIBrightCyan[0],
+        \ s:p.ANSIWhite[0]
+        \ ]
+endif
+
+" C/C++
+call s:Hi('cMacroName', s:p.macroName)
+hi! link cConstant cMacroName
+hi! link cPreInclude String
+hi! link cPreProcRegion NormalFg
+hi! link cUserLabel NormalFg
+hi! link cDataStructureKeyword Keyword
+call s:Hi('cDataStructure', s:p.cDataStructure)
+hi! link cFunction Function
+hi! link cppDestructor cFunction
+hi! link cSemicolon Keyword
+hi! link cComma Keyword
+call s:Hi('cppAfterColon', s:p.cStructField)
+hi! link cppBeforeColon cDataStructure
+call s:Hi('cStructField', s:p.cStructField)
+hi! link cppNullptr Keyword
+hi! link cppTemplate Keyword
+hi! link cTypedef Keyword
+hi! link cppTypeName Keyword
+hi! link cSpecial Keyword
+hi! link cEnum Keyword
+call s:Hi('cSomeMacro', s:p.macroName)
+
+" Rust
+call s:Hi('rustDeriveTrait', s:p.metaData)
+hi! link rustQuestionMark Keyword
+hi! link rustComma Keyword
+hi! link rustSemicolon Keyword
+hi! link rustOperator NormalFg
+call s:Hi('rustCommentLineDoc', s:p.docComment, s:p.null, 'italic')
+call s:Hi('rustMacro', s:p.rustMacro)
+hi! link rustAssert rustMacro
+hi! link rustPanic rustMacro
+hi! link rustEscape Keyword
+hi! link rustSigil NormalFg
+hi! link rustSelf Keyword
+call s:Hi('rustLifetime', s:p.rustLifetime, s:p.null, 'italic')
+call s:Hi('rustTypeParameter', s:p.rustLifetime)
+hi! link rustEnumVariant Constant
+hi! link rustModPath NormalFg
+hi! link rustModPathSep NormalFg
+hi! link rustAs Keyword
+hi! link rustConst Constant
+hi! link rustVarField InstanceField
 
 " Vim
 hi! link vimOption Constant
 hi! link vimFunction Function
 hi! link vimContinue NonText
-hi! link vimParenSep Normal
+hi! link vimParenSep NormalFg
 hi! link vimBracket PreProc
-hi! link vimOper Normal
-hi! link vimSep Normal
+hi! link vimOper NormalFg
+hi! link vimSep NormalFg
+hi! link vimCommentString Comment
 
 " JavaScript
 hi! link jsNoise Keyword
 hi! link JsImport Keyword
 hi! link JsFrom Keyword
-hi! link JsOperator Normal
-hi! link jsArrowFunction Normal
+hi! link JsOperator NormalFg
+hi! link jsArrowFunction NormalFg
 hi! link jsFuncArgCommas Delimiter
-hi! link jsObjectKey Constant
-hi! link jsTernaryIfOperator Normal
+hi! link jsObjectKey InstanceField
+hi! link jsTernaryIfOperator NormalFg
 hi! link jsObjectSeparator Keyword
-hi! link jsSpreadOperator Normal
+hi! link jsSpreadOperator NormalFg
 hi! link jsModuleComma Keyword
-hi! link jsClassDefinition Normal
+hi! link jsClassDefinition NormalFg
 hi! link jsSuper Keyword
 hi! link jsThis Keyword
-hi! link jsObjectProp Constant
+hi! link jsObjectProp InstanceField
 hi! link jsDestructuringNoise Keyword
 hi! link jsClassProperty Function
 hi! link jsBooleanTrue Keyword
 hi! link jsBooleanFalse Keyword
-hi! link jsObjectShorthandProp Normal
-hi! link jsObjectColon Normal
+hi! link jsObjectShorthandProp NormalFg
+hi! link jsObjectColon NormalFg
 hi! link jsExport Keyword
 hi! link jsModuleAs Keyword
 
 " TypeScript
-hi! link typescriptBraces Normal
+hi! link typescriptBraces NormalFg
 hi! link typescriptDocComment docComment
 hi! link typescriptDocParam docComment
-hi! link typescriptParens Normal
-hi! link typescriptOpSymbols Constant
+hi! link typescriptParens NormalFg
+hi! link typescriptOpSymbols InstanceField
 hi! link typescriptRegexpString Number
 hi! link typescriptSpecial Keyword
-hi! link typescriptLogicSymbols Constant
+hi! link typescriptLogicSymbols InstanceField
 hi! link typescriptExceptions Keyword
-call s:Hi('typescriptDocTags', s:docComment, s:bg, 'bold,italic,underline')
-call s:Hi('typescriptGlobalObjects', s:tsObject)
+call s:Hi('typescriptDocTags', s:p.docComment, s:p.null, 'bold,italic,underline')
+call s:Hi('typescriptGlobalObjects', s:p.tsObject)
 
 " JSON
-hi! link jsonBraces Normal
-hi! link jsonKeyword Constant
-hi! link jsonCommentError Comment
+hi! link jsonBraces NormalFg
+hi! link jsonKeyword InstanceField
 hi! link jsonNoise Keyword
 hi! link jsonKeywordMatch Keyword
 hi! link jsonBoolean Keyword
@@ -289,44 +491,44 @@ hi! link jsonEscape Keyword
 hi! link jsonStringMatch String
 
 " XML
-call s:Hi('xmlTagName', s:tag)
+call s:Hi('xmlTagName', s:p.tag)
 hi! link xmlEndTag xmlTagName
-hi! link xmlAttrib Normal
+hi! link xmlAttrib NormalFg
 hi! link xmlProcessingDelim xmlTagName
 hi! link xmlDocTypeKeyword xmlTagName
 hi! link xmlComment Comment
 hi! link xmlCommentStart xmlComment
 hi! link xmlCommentPart xmlComment
-call s:Hi('xmlEntity', s:entity)
+call s:Hi('xmlEntity', s:p.entity)
 hi! link xmlEntityPunct xmlEntity
-hi! link xmlCdata Normal
+hi! link xmlCdata NormalFg
 hi! link xmlCdataCdata xmlCdata
 hi! link xmlCdataStart xmlCdata
 hi! link xmlCdataEnd xmlCdata
-hi! link xmlNamespace Constant
-hi! link xmlAttribPunct Normal
+hi! link xmlNamespace InstanceField
+hi! link xmlAttribPunct NormalFg
 hi! link xmlEqual xmlString
 
 " GraphQL
-hi! link graphqlTaggedTemplate Normal
+hi! link graphqlTaggedTemplate NormalFg
 
 " YAML
-hi! link yamlDocumentStart Normal
-hi! link yamlDocumentEnd Normal
+hi! link yamlDocumentStart NormalFg
+hi! link yamlDocumentEnd NormalFg
 hi! link yamlComment docComment
 hi! link yamlBlockMappingKey Keyword
-hi! link yamlKeyValueDelimiter Normal
-hi! link yamlInteger Normal
-hi! link yamlFloat Normal
-hi! link yamlBlockCollectionItemStart Normal
-call s:Hi('yamlAnchor', s:tag)
+hi! link yamlKeyValueDelimiter NormalFg
+hi! link yamlInteger NormalFg
+hi! link yamlFloat NormalFg
+hi! link yamlBlockCollectionItemStart NormalFg
+call s:Hi('yamlAnchor', s:p.tag)
 hi! link yamlAlias yamlAnchor
-hi! link yamlBool Normal
-hi! link yamlNodeTag Normal
-hi! link yamlNull Normal
+hi! link yamlBool NormalFg
+hi! link yamlNodeTag NormalFg
+hi! link yamlNull NormalFg
 
 " Markdown
-call s:Hi('markdownH1', s:constant, 'NONE', 'italic')
+hi! link markdownH1 Constant
 hi! link markdownH2 markdownH1
 hi! link markdownH3 markdownH1
 hi! link markdownH4 markdownH1
@@ -334,86 +536,86 @@ hi! link markdownH5 markdownH1
 hi! link markdownH6 markdownH1
 hi! link markdownHeadingRule markdownH1
 hi! link markdownHeadingDelimiter markdownH1
-call s:Hi('markdownAutomaticLink', s:link, 'NONE', 'underline')
+call s:Hi('markdownAutomaticLink', s:p.link, s:p.null, 'underline')
 hi! link markdownBlockquote String
 hi! link markdownBoldDelimiter Keyword
-hi! link markdownBold Normal
+hi! link markdownBold NormalFg
 hi! link markdownItalicDelimiter Keyword
-hi! link markdownItalic Normal
+hi! link markdownItalic NormalFg
 hi! link markdownCode Comment
 hi! link markdownCodeDelimiter markdownCode
 hi! link markdownCodeBlock markdownCode
-call s:Hi('markdownLinkText', s:link, 'NONE', 'underline')
+call s:Hi('markdownLinkText', s:p.link, s:p.null, 'underline')
 hi! link markdownLinkTextDelimiter markdownLinkText
 hi! link markdownUrlDelimiter markdownLinkText
-call s:Hi('markdownUrl', s:function, 'NONE', 'italic')
+call s:Hi('markdownUrl', s:p.function, s:p.null, 'italic')
 hi! link markdownIdDelimiter Keyword
 hi! link markdownLinkDelimiter Keyword
 hi! link markdownIdDeclaration Keyword
-hi! link markdownLinkDelimiter Normal
+hi! link markdownLinkDelimiter NormalFg
 hi! link markdownUrlTitleDelimiter Comment
 hi! link markdownRule Comment
 
 " HTML
 let html_no_rendering=1
-call s:Hi('htmlTag', s:tag)
+call s:Hi('htmlTag', s:p.tag)
 hi! link htmlTagName htmlTag
 hi! link htmlEndTag htmlTag
-call s:Hi('htmlArg', s:htmlAttribute)
-call s:Hi('htmlString', s:htmlString)
+call s:Hi('htmlArg', s:p.htmlAttribute)
+call s:Hi('htmlString', s:p.htmlString)
 hi! link htmlValue htmlString
 hi! link htmlComment Comment
 hi! link htmlCommentError Comment
 hi! link htmlCommentPart Comment
-call s:Hi('htmlSpecialChar', s:entity)
+call s:Hi('htmlSpecialChar', s:p.entity)
 hi! link htmlSpecialTagName htmlTag
 
 " CSS
 hi! link cssAtKeyword Keyword
-hi! link cssBraces Normal
+hi! link cssBraces NormalFg
 hi! link cssAttributeSelector htmlTag
-hi! link cssSelectorOp Normal
+hi! link cssSelectorOp NormalFg
 hi! link cssClassName htmlTag
 hi! link cssNoise Keyword
 hi! link cssAttrComma Keyword
 hi! link cssFunctionComma Keyword
 hi! link cssMediaComma Keyword
 hi! link cssComment Comment
-hi! link cssClassNameDot Normal
-call s:Hi('cssFunctionName', s:tag)
-call s:Hi('cssColor', s:number)
-call s:Hi('cssIdentifier', s:tag)
-call s:Hi('cssPseudoClassId', s:tag)
-call s:Hi('cssImportant', s:keyword, s:bg, 'bold')
-call s:Hi('cssProp', s:htmlAttribute)
-call s:Hi('cssAttr', s:htmlString)
-call s:Hi('cssAttrRegion', s:htmlString)
-call s:Hi('cssURL', s:link)
+hi! link cssClassNameDot NormalFg
+call s:Hi('cssFunctionName', s:p.tag)
+call s:Hi('cssColor', s:p.number)
+call s:Hi('cssIdentifier', s:p.tag)
+call s:Hi('cssPseudoClassId', s:p.tag)
+call s:Hi('cssImportant', s:p.keyword, s:p.null, 'bold')
+call s:Hi('cssProp', s:p.htmlAttribute)
+call s:Hi('cssAttr', s:p.htmlString)
+call s:Hi('cssAttrRegion', s:p.htmlString)
+call s:Hi('cssURL', s:p.link)
 
 " Shell Script
-call s:Hi('sheBang', s:fg, s:bg, 'bold')
-hi! link shRange Normal
+call s:Hi('sheBang', s:p.fg, s:p.null, 'bold')
+hi! link shRange NormalFg
 hi! link shFunctionKey Keyword
-call s:Hi('shStatement', s:keywordTwo)
+call s:Hi('shStatement', s:p.shCommand)
 hi! link bashStatement shStatement
-hi! link shDerefVar Normal
+hi! link shDerefVar NormalFg
 hi! link shQuote String
-call s:Hi('shHereDoc', 'NONE', s:templateLanguage)
-call s:Hi('shRedir', s:fg, s:bg, 'bold')
-hi! link shDerefSimple Normal
-hi! link shCommandSubBQ Constant
-hi! link shOption Normal
+call s:Hi('shHereDoc', s:p.null, s:p.templateLanguage)
+call s:Hi('shRedir', s:p.fg, s:p.null, 'bold')
+hi! link shDerefSimple NormalFg
+hi! link shCommandSubBQ InstanceField
+hi! link shOption NormalFg
 hi! link shCmdSubRegion shStatement
-hi! link shCommandSub Normal
+hi! link shCommandSub NormalFg
 hi! link shLoop Keyword
 hi! link shCommandSub Keyword
 hi! link shSet shStatement
 hi! link shFunctionTwo shStatement
 hi! link shCtrlSeq String
 hi! link shSpecial String
-hi! link shCommandSub Normal
-hi! link shDerefSpecial Normal
-hi! link shOperator Normal
+hi! link shCommandSub NormalFg
+hi! link shDerefSpecial NormalFg
+hi! link shOperator NormalFg
 
 " help
 hi! link helpHyperTextJump Number
