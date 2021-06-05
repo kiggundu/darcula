@@ -110,7 +110,8 @@ let s:p={
       \ 'UIBlue': ['#3592C4', 67],
       \ 'UIGreen': ['#499C54', 71],
       \ 'UIRed': ['#C75450', 131],
-      \ 'UIBrown': ['#93896C', 102]
+      \ 'UIBrown': ['#93896C', 102],
+      \ 'pseudoVariable': ['#846FA4', 174]
       \ }
 
 " expose the palette
@@ -624,6 +625,7 @@ hi! link helpHyperTextJump Number
 hi! link CoqtailChecked docComment 
 
 " Ruby
-hi! link rubyBoolean			Keyword
-hi! link rubyPseudoVariable		Keyword
-hi! link rubySymbol		        Keyword
+call s:Hi('PseudoVariable', s:p.bg, s:p.pseudoVariable, 'italic')
+hi! link rubyBoolean			PseudoVariable
+hi! link rubyPseudoVariable		PseudoVariable
+hi! link rubySymbol		        PseudoVariable
