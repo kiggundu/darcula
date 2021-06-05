@@ -622,3 +622,8 @@ hi! link helpHyperTextJump Number
 
 " Coq ( via Coqtail ) overrides 
 hi! link CoqtailChecked docComment 
+
+" Ruby
+hi! link rubyBoolean			Keyword
+hi! link rubyPseudoVariable		Keyword
+hi! link rubySymbol		        Keyword
